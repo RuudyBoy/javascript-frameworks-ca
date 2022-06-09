@@ -18,6 +18,12 @@ body {
   margin: 10px;
 }
 
+p {
+  max-width: 500px;
+  font-size: 1em;
+  margin: 0px auto;
+}
+
 a {
   color: #ebebeb;
   text-decoration: none;

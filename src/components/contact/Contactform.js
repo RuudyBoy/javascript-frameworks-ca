@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
 import "../../App.css";
-import { SPORTS , DEFAULT_VALUES } from "../../constants/registration";
+import { SPORTS } from "../../constants/registration";
 
 
 const schema = yup.object().shape({

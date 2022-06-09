@@ -4,14 +4,14 @@ import SportList from "./components/SportList";
 import SportDetail from "./components/SportDetail";
 import Contact from "./components/contact/Contact";
 import LoginPage from "./components/login/LoginPage";
-import DashboardPage from "./components/dashboard/DashboardPage";
+import AdminPage from "./components/admin/AdminPage";
 import Nav from "./components/layout/Nav";
-//import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 
 function App() {
 	return (
-		//<AuthProvider>
+		<AuthProvider>
 			<Router>
 				<Nav />
 
@@ -22,14 +22,14 @@ function App() {
 						<Route path="/login">
 							<LoginPage />
 						</Route>
-						<Route path="/dashboard" exact>
-							<DashboardPage />
+						<Route path="/admin" exact>
+							<AdminPage />
 						</Route>
 						<Route path="/contact"> <Contact /> </Route>
 					</Switch>
 				</div>
 			</Router>
-		//</AuthProvider>
+		</AuthProvider>
 	);
 }
 

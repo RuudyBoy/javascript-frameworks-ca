@@ -3,6 +3,4 @@ export const SPORTS = [
     { value: "Basketball", label: "Basketball" },
     { value: "Baseball", label: "Baseball" },
 ];
-export const DEFAULT_VALUES = {
-    sports: ""
-};
+
