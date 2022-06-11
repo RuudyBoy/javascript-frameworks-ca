@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import FormError from "../common/FormError";
+import FormError from "../common/ValidationError";
 import { TOKEN_PATH } from "../../constants/api";
 import AuthContext from "../../context/AuthContext";
 
@@ -31,7 +31,7 @@ export default function LoginForm() {
 		setSubmitting(true);
 		setLoginError(null);
 
-		// console.log(data);
+		console.log(data);
 
 		try {
 			const response = await axios.post(url, data);
