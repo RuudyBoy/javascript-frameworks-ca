@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SportPost from "./components/SportPosts";
-import SportDetail from "./components/SportInfo";
+import SportInfo from "./components/SportInfo";
 import Contact from "./components/contact/Contact";
 import LoginPage from "./components/login/LoginPage";
 import AdminPage from "./components/admin/AdminPage";
@@ -18,7 +18,7 @@ function App() {
 				<div className="container">
 					<Switch>
 					<Route path='/' exact component={SportPost} />
-					<Route path='/detail/:title' component={SportDetail} />
+					<Route path='/detail/:id' component={SportInfo} />
 						<Route path="/login">
 							<LoginPage />
 						</Route>

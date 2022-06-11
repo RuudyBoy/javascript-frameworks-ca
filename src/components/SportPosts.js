@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import SportItem from "./SportItem";
+import SportItem from "./Sport";
 import { BASE_URL } from "../constants/api";
 
-function SportList() {
+function SportPost() {
 	const [sports, setSports] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -14,7 +14,6 @@ function SportList() {
 
 				if (response.ok) {
 					const json = await response.json();
-					console.log(json);
 					setSports(json);
 				} else {
 					setError("An error occured");
@@ -29,21 +28,21 @@ function SportList() {
 	}, []);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div className="error-message">Waiting...</div>;
 	}
 
 	if (error) {
-		return <div>An error occured: {error}</div>;
+		return <div className="error-message"> We can`t access your content. Please refresh to try again.{error}</div>;
 	}
 
 	return (
 		<div className="sports">
 			{sports.map(function (sport) {
-				const { id, title, published } = sport;
-				return <SportItem key={id} id={id} title={title.rendered} published={published} />;
+				const { id, title } = sport;
+				return <SportItem key={id} id={id} title={title.rendered} />;
 			})}
 		</div>
 	);
 }
 
-export default SportList;
+export default SportPost;

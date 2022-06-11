@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function SportItem({ id, title}) { 
 	return (
-		<div className="call">
+		<div className="sport-list">
 		<Link to={`/detail/${id}`}>
 			<h2>{title}</h2>
 			<p>{id}</p>
