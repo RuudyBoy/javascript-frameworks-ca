@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import axios from "axios";
+import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
-const url = process.env.REACT_APP_BASE_URL;
+const url = "http://organicflowerpower.org/";
 
-export default function useAxios() {
+export default function Axios() {
  const [auth] = useContext(AuthContext);
 
  const apiClient = axios.create({

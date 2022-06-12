@@ -1,18 +1,18 @@
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import FormError from "../common/ValidationError";
+import { useForm } from "react-hook-form";
+import FormError from "../common/FormError";
 import { TOKEN_PATH } from "../../constants/api";
 import AuthContext from "../../context/AuthContext";
 
 const url = TOKEN_PATH;
 
 const schema = yup.object().shape({
-	username: yup.string().required("Please enter your username"),
-	password: yup.string().required("Please enter your password"),
+	username: yup.string().required("Enter your username/Email here"),
+	password: yup.string().required("Enter your password"),
 });
 
 export default function LoginForm() {
@@ -30,8 +30,6 @@ export default function LoginForm() {
 	async function onSubmit(data) {
 		setSubmitting(true);
 		setLoginError(null);
-
-		console.log(data);
 
 		try {
 			const response = await axios.post(url, data);
