@@ -1,44 +1,39 @@
+import { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import FormError from "../common/FormError";
 import { TOKEN_PATH } from "../../constants/api";
-import AuthContext from "../../context/AuthContext";
 
-const url = TOKEN_PATH;
+const url = 'https://noroff-cors.herokuapp.com/' + TOKEN_PATH;
 
-const schema = yup.object().shape({
-	username: yup.string().required("Enter your username/Email here"),
-	password: yup.string().required("Enter your password"),
-});
+const schema =yup.object({
+    Username: yup.string().required("Please enter your username"),
+    Password: yup.number().required("Please enter your password"),
+  }).required();
 
 export default function LoginForm() {
-	const [submitting, setSubmitting] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 	const [loginError, setLoginError] = useState(null);
-
-	const history = useHistory();
-
-	const { register, handleSubmit, errors } = useForm({
-		resolver: yupResolver(schema),
-	});
-
-	const [ setAuth] = useContext(AuthContext);
-
-	async function onSubmit(data) {
+    
+	const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+      });
+    
+      async function onSubmit(data) {
 		setSubmitting(true);
-		setLoginError(null);
+        setLoginError(null);
+
+		console.log(data);
 
 		try {
 			const response = await axios.post(url, data);
 			console.log("response", response.data);
-			setAuth(response.data);
-			history.push("/admin");
 		} catch (error) {
 			console.log("error", error);
-			setLoginError(error.toString());
+            setLoginError(error.toString());
 		} finally {
 			setSubmitting(false);
 		}
@@ -47,18 +42,18 @@ export default function LoginForm() {
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				{loginError && <FormError>{loginError}</FormError>}
-				
-					<div>
-					    <input {...register("username")} />
-						{errors.username && <FormError>{errors.username.message}</FormError>}
-					</div>
-
-					<div>
-					<input {...register("password")} />
-						{errors.password && <FormError>{errors.password.message}</FormError>}
-					</div>
-					<button>{submitting ? "Loggin in..." : "Login"}</button>
+            {loginError && <FormError>{loginError}</FormError>}
+            <fieldset disabled={submitting}>
+                <div>
+                    <input name="username" {...register("Username", { required: true, maxLength: 5})} />
+					{errors.username && <FormError>This field is required</FormError>}
+                </div>
+				<div>
+                    <input name="password" {...register("Password", { required: true })} />
+					{errors.password && <FormError>This field is required</FormError>}
+                </div>
+            <button>{submitting ? "Loggin in..." : "Login"}</button>
+            </fieldset>
 			</form>
 		</>
 	);
